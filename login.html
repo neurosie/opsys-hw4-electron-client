@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Connect to Server</title>
+		<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./style.css">
+		<script>
+			window.$ = require('jquery')
+			window.Bootstrap = require('bootstrap')
+			const { remote, ipcRenderer } = require('electron')
+			
+			const sock = remote.getGlobal('sock')
+			let username
+			
+			function onError (err) {
+				sock.destroy()
+				alert(err)
+				$('#submit-btn').prop('disabled', false).html('Connect')
+			}
+			
+			function onData (data) {
+				if (data === 'OK\n') {
+					sock.removeListener('error', onError)
+					sock.removeListener('data', onData)
+					ipcRenderer.send('login', username)
+				} else {
+					onError(data)
+				}
+			}
+			
+			sock.on('error', onError)
+			sock.on('data', onData)
+			
+			$(() => {
+				$('form').submit((e) => {
+					e.preventDefault()
+					$('#submit-btn').prop('disabled', true).html('Connecting...')
+					username = $('#username').val()
+					sock.connect($('#port').val(), $('#ip-address').val(), () => {
+						sock.write('LOGIN ' + username + '\n')
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="container">
+		<form>
+			<div class="form-row">
+				<div class="form-group col-6">
+					<label for="ip-address">IP address</label>
+					<input id="ip-address" name="ip-address" type="text" placeholder="127.0.0.1" required="required" class="form-control" value="127.0.0.1">
+				</div>
+				<div class="form-group col-3">
+					<label for="port">Port</label>
+					<input id="port" name="port" type="number" required="required" class="form-control" value="9876">
+				</div>
+				<div class="form-group col-3">
+					<label for="protocol">Protocol</label> 
+					<select id="protocol" name="protocol" required="required" class="form-control">
+						<option value="TCP">TCP</option>
+						<option value="UDP">UDP</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="username">Username</label> 
+				<input id="username" name="username" type="text" required="required" class="form-control">
+			</div> 
+			<div class="form-group">
+				<button id="submit-btn" name="submit" type="submit" class="btn btn-primary">Connect</button>
+			</div>
+		</form>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Hello World!</title>
+		<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./style.css">
+		<script>
+			window.$ = require('jquery')
+			window.Bootstrap = require('bootstrap')
+			require('./renderer.js')
+		</script>
+	</head>
+	<body>
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-3">
+				<h4>Users</h4>
+				<div class="list-group" id="user-list" role="tablist">
+					<!-- <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active" id="label-asdf" data-toggle="list" href="#list-asdf" role="tab"> -->
+						<!-- asdf -->
+						<!-- <span class="badge badge-primary badge-pill" hidden>10</span> -->
+					<!-- </a> -->
+					<!-- <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="label-doof" data-toggle="list" href="#list-doof" role="tab"> -->
+						<!-- doof -->
+						<!-- <span class="badge badge-primary badge-pill" hidden>5</span> -->
+					<!-- </a> -->
+				</div>
+			</div>
+			<div class="col-9 chat-content">
+				<h4>Chat</h4>
+				<div class="tab-content" id="chat-list" style="overflow-y:scroll">
+					<!-- <div class="tab-pane show active" id="list-asdf" role="tabpanel"> -->
+						<!-- <div class="message-bubble message-bubble-left"> -->
+						<!-- hi from asdf -->
+						<!-- </div> -->
+						<!-- <div class="message-bubble message-bubble-right"> -->
+						<!-- hello friend -->
+						<!-- </div> -->
+					<!-- </div> -->
+					<!-- <div class="tab-pane" id="list-doof" role="tabpanel"> -->
+						<!-- hi from doof -->
+					<!-- </div> -->
+				</div>
+				<form class="message-form">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control message-compose" maxlength="1023"></input>
+							<div class="input-group-append">
+								<button class="btn btn-secondary" type="submit">Send</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

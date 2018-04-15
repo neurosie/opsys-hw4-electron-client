@@ -1,0 +1,65 @@
+/* 
+dark bubble bg: #343a40
+dark bubble text: #fff
+light bubble bg: #f8f9fa
+light bubble text: #343a40
+*/
+
+body, .chat-content {
+	height: 100vh;
+}
+
+.chat-content {
+	display: flex;
+	flex-direction: column;
+}
+#chat-list {
+	flex: 1;
+}
+
+.message-bubble {
+	position: relative;
+	clear: both;
+	border-radius: .5rem;
+	padding: 0.5rem;
+	margin: 0.2rem;
+}
+
+.message-bubble-left {
+	float: left;
+	margin-left: 1em;
+	background: #f8f9fa;
+	color: #343a40;
+}
+
+.message-bubble-right {
+	float: right;
+	margin-right: 1em;
+	background: #343a40;
+	color: #fff;
+}
+
+.message-bubble:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 1em solid transparent;
+	border-bottom: 0;
+	margin-top: -0.5em;
+}
+
+.message-bubble-left:after {
+	left: 0;
+	border-right-color: #f8f9fa;
+	border-left: 0;
+	margin-left: -1em;
+}
+
+.message-bubble-right:after {
+	right: 0;
+	border-left-color: #343a40;
+	border-right: 0;
+	margin-right: -1em;
+}
