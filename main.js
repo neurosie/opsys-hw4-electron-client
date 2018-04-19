@@ -2,11 +2,11 @@ const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 const net = require('net')
+const Client = require('./client')
 
 let mainWindow, loginWindow
-global.sock = new net.Socket()
+global.sock = new Client()
 global.username = ''
-sock.setEncoding('utf8')
 
 
 function loginPrompt() {

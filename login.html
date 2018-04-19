@@ -25,18 +25,21 @@
 					sock.removeListener('data', onData)
 					ipcRenderer.send('login', username)
 				} else {
+					console.log(data)
+					console.log(data.length)
 					onError(data)
 				}
 			}
-			
-			sock.on('error', onError)
-			sock.on('data', onData)
 			
 			$(() => {
 				$('form').submit((e) => {
 					e.preventDefault()
 					$('#submit-btn').prop('disabled', true).html('Connecting...')
 					username = $('#username').val()
+					sock.setup($('#protocol').val())
+					console.log(sock)
+					sock.on('error', onError)
+					sock.on('data', onData)
 					sock.connect($('#port').val(), $('#ip-address').val(), () => {
 						sock.write('LOGIN ' + username + '\n')
 					})

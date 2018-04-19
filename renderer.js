@@ -33,6 +33,7 @@ function handleData(data) {
 
 function refreshUsers() {
 	sock.prependOnceListener('data', (data) => {
+		console.log(data)
 		users = data.split('\n').slice(1, -1)
 		
 		existingUsers = [remote.getGlobal('username')]
@@ -78,6 +79,19 @@ function sendMessage(event) {
 	sock.write(`SEND ${$('#chat-list .active').attr('id').substr(5)} ${message.length} ${message}`)
 }
 
+function broadcastMessage(event) {
+	event.preventDefault()
+	let message = $('.message-compose').val()
+	$('.message-compose').val('')
+	
+	$('#chat-list .tab-pane').append(`
+		<div class="message-bubble message-bubble-right">${message}</div>
+	`)
+	scrollChat()
+	message += '\n'
+	sock.write(`BROADCAST ${message.length} ${message}`)
+}
+
 function switchTab() {
 	console.log('tab')
 	$('.list-group-item-action.active .badge').prop('hidden', true).html('0')
@@ -89,7 +103,8 @@ $(() => {
 	sock.on('data', handleData)
 	$('.message-form').submit(sendMessage)
 	$('#user-list').on('shown.bs.tab', switchTab)
-	
+	$('#user-refresh').click(refreshUsers)
+	$('.broadcast').click(broadcastMessage)
 	refreshUsers()
 	
 })

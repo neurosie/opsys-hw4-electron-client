@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Hello World!</title>
 		<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link href="./node_modules/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 		<link rel="stylesheet" href="./style.css">
 		<script>
 			window.$ = require('jquery')
@@ -15,39 +16,27 @@
 		<div class="container-fluid">
 		<div class="row">
 			<div class="col-3">
-				<h4>Users</h4>
-				<div class="list-group" id="user-list" role="tablist">
-					<!-- <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active" id="label-asdf" data-toggle="list" href="#list-asdf" role="tab"> -->
-						<!-- asdf -->
-						<!-- <span class="badge badge-primary badge-pill" hidden>10</span> -->
-					<!-- </a> -->
-					<!-- <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="label-doof" data-toggle="list" href="#list-doof" role="tab"> -->
-						<!-- doof -->
-						<!-- <span class="badge badge-primary badge-pill" hidden>5</span> -->
-					<!-- </a> -->
+				<div class="d-flex justify-content-between align-items-center">
+					<h2>Users</h2>
+					<button id="user-refresh" class="btn btn-sm btn-outline-primary" type="button">
+						<span class="oi oi-reload"></span>
+					</button>
 				</div>
+				<div class="list-group" id="user-list" role="tablist">
+				</div>
+				
 			</div>
 			<div class="col-9 chat-content">
-				<h4>Chat</h4>
+				<h2>Chat</h2>
 				<div class="tab-content" id="chat-list" style="overflow-y:scroll">
-					<!-- <div class="tab-pane show active" id="list-asdf" role="tabpanel"> -->
-						<!-- <div class="message-bubble message-bubble-left"> -->
-						<!-- hi from asdf -->
-						<!-- </div> -->
-						<!-- <div class="message-bubble message-bubble-right"> -->
-						<!-- hello friend -->
-						<!-- </div> -->
-					<!-- </div> -->
-					<!-- <div class="tab-pane" id="list-doof" role="tabpanel"> -->
-						<!-- hi from doof -->
-					<!-- </div> -->
 				</div>
 				<form class="message-form">
 					<div class="form-group">
 						<div class="input-group">
 							<input type="text" class="form-control message-compose" maxlength="1023"></input>
 							<div class="input-group-append">
-								<button class="btn btn-secondary" type="submit">Send</button>
+								<button class="btn btn-primary" type="submit">Send</button>
+								<button class="btn btn-secondary broadcast" type="button">Broadcast</button>
 							</div>
 						</div>
 					</div>
